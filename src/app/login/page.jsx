@@ -74,25 +74,16 @@ export default function Login() {
         <div className="absolute bottom-40 left-20 w-2 h-2 bg-pink-400 rounded-full opacity-70 animate-ping"></div>
       </div>
       
-      <div className="relative z-10 max-w-md mx-auto bg-gradient-to-br from-gray-900/90 to-black/90 p-8 rounded-2xl shadow-2xl border border-purple-500/30 backdrop-blur-sm">
+      <div className="relative z-10 max-w-md mx-auto bg-gradient-to-br from-gray-900/90 to-black/90 p-8 rounded-2xl shadow-2xl border border-white/10 backdrop-blur-sm">
         <div className="text-center mb-8">
           <div className="mx-auto mb-4 bg-gradient-to-r rounded-full flex items-center justify-center">
-            <h1 className="text-4xl ">🌊odeIU</h1>
+            <h1 className="text-3xl font-bold ">🌊odeIU</h1>
           </div>
-          <button
-            type="button"
-            onClick={handleGoogleLogin}
-            className="w-full mb-6 cursor-pointer bg-white text-black py-2 rounded-lg font-semibold flex items-center justify-center gap-2 shadow hover:bg-gray-100 transition"
-          >
-        <Image src="/google.png" alt="Google" className="w-8 bg-white h-8" width={20} height={20} />
-           Login with Google
-          </button>
-          <h2 className="text-3xl font-bold text-transparent bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text"></h2>
-          <p className="text-gray-400 mt-2 text-2xl">Login</p>
+        
         </div>
         <form onSubmit={handleSubmit}>
           <div className="mb-6">
-            <label htmlFor="email" className="block mb-2 text-cyan-400 font-medium">IU Email</label>
+            <label htmlFor="email" className="block mb-2 text-cyan-400 font-medium">Email</label>
             <input
               type="email"
               id="email"
@@ -100,7 +91,7 @@ export default function Login() {
               value={formData.email}
               onChange={handleChange}
               placeholder="neural@quantum.net"
-              className="w-full px-4 py-3 bg-gray-800/50 border border-purple-500/30 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-transparent transition-all"
+              className="w-full px-4 py-3 bg-gray-800/50 border border-white/10 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-transparent transition-all"
             />
             {errors.email && <div className="text-red-500 text-sm mt-2">{errors.email}</div>}
           </div>
@@ -114,18 +105,30 @@ export default function Login() {
               value={formData.password}
               onChange={handleChange}
               placeholder="••••••••"
-              className="w-full px-4 py-3 bg-gray-800/50 border border-purple-500/30 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent transition-all"
+              className="w-full px-4 py-3 bg-gray-800/50 border border-white/10 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent transition-all"
             />
             {errors.password && <div className="text-red-500 text-sm mt-2">{errors.password}</div>}
           </div>
 
-          <button type="submit" className="w-full bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-500 hover:to-cyan-500 text-white py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-purple-500/25">
+          
+          <button type="submit" className="w-full bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-500 hover:to-cyan-500 text-white py-2 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-purple-500/25">
             Login
+          </button>
+
+          
+          <p className=" flex items-center justify-center text-gray-400 p-4 text-xl">or</p>
+            <button
+            type="button"
+            onClick={handleGoogleLogin}
+            className="w-full mb-6 cursor-pointer bg-white text-black py-2 rounded-lg font-semibold flex items-center justify-center gap-2 shadow  transition"
+          >
+        <Image src="/google.png" alt="Google" className="w-7 bg-white h-7" width={10} height={10} />
+           Login with Google
           </button>
         </form>
 
         <div className="text-center mt-6 text-gray-400">
-          New to the 🌊odeIU realm? <Link href="/signup" className="text-cyan-400 hover:text-purple-400 transition-colors">Initialize Neural Profile</Link>
+          Don't have an account? <Link href="/signup" className=" text-cyan-400 hover:text-purple-400 transition-colors">SignUp</Link>
         </div>
       </div>
     </div>

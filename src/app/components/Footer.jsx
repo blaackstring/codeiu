@@ -1,10 +1,10 @@
 export default function Footer() {
   return (
-    <footer className="bg-black w-full text-white py-10 mt-auto border-t border-purple-500/30">
+    <footer className="bg-black w-full text-white py-10 mt-auto border-t border-white/10">
       <div className="max-w-6xl mx-auto px-5 flex flex-col md:flex-row justify-between items-start gap-8">
         {/* Brand Section */}
         <div>
-          <h3 className="text-2xl font-bold mb-2 text-purple-400">🌊odeIU</h3>
+          <h3 className="text-2xl font-bold mb-2 text-gray-100">🌊odeIU</h3>
           <p className="text-gray-400 text-sm">
             Your gateway to the future of web development.<br />
             Building tomorrow's applications with cutting-edge technology.
@@ -51,9 +51,9 @@ export default function Footer() {
           </div>
         </div>
       </div>
-      <div className="border-t border-purple-500/30 mt-8 pt-6 text-center">
+      <div className="border-t border-white/10 mt-8 pt-6 text-center">
         <p className="text-xs text-gray-500">
-          &copy; 2024 <span className="text-purple-400 font-semibold">🌊odeIU</span>. Shaping the future, one line of code at a time.
+          &copy; 2024 <span className="text-gray-300 font-semibold">🌊odeIU</span>. Shaping the future, one line of code at a time.
         </p>
       </div>
     </footer>

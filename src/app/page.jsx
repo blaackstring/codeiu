@@ -3,7 +3,7 @@ export default function Home() {
     <div className="min-h-screen flex  flex-col justify-center items-center bg-black">
       <div className="w-full max-w-4xl relative">
         <div className="hero-image-container w-full">
-          <img src="./image3.png" alt="AI robots building an infinity symbol" className="w-full h-auto" />
+          <img src="./image3.png" alt="AI robots building an infinity symbol" className="w-screen h-auto" />
         </div>
         <div className="absolute top-0 left-0 w-full h-full flex flex-col items-center z-10 p-4 sm:pb-32">
           <h1
