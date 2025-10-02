@@ -1,12 +1,37 @@
 'use client'
 
 import Link from 'next/link'
+import { usePathname } from 'next/navigation';
 import { useState } from 'react'
 
 
 export default function Header() {
 
   const [isLoggedIn , setisLoggedIn] = useState(true); 
+
+  const pages= [
+    {
+      name:'Explore',
+      link:'/explore'
+    },
+    {
+      name:'Problem',
+      link:'/problem'
+    },
+    {
+      name:'Contest',
+      link:'/contest'
+    },
+    {
+      name:'Registered',
+      link:'/registered'
+    
+    }
+
+  ]
+  const pathname=usePathname();
+  console.log(pathname);
+  
 
   return (
     <header className=" backdrop-blur-md shadow-lg p-2   flex justify-between items-center sticky top-0 z-50 border-b border-white/10  ">
@@ -21,22 +46,13 @@ export default function Header() {
         {isLoggedIn && (
           <div>
           <ul className="flex justify-center items-center gap-6 font-semibold cursor-pointer">
-            <li className='hover:text-white font-semibold transition-colors relative group'>
-              Explore
+          {pages.map((page,i)=>(
+            <Link href={page.link} key={i} className={`${pathname==page.link?'text-purple-500':"text-gray-300"
+            } font-semibold transition-colors relative group`}>
+              {page.name}
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r  from-white to-gray-200 group-hover:w-full transition-all duration-300"></span>
-            </li>
-            <li className='hover:text-white font-semibold transition-colors relative group'>
-              Problem
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r  from-white to-gray-200 group-hover:w-full transition-all duration-300"></span>
-            </li>
-            <li className='hover:text-white font-semibold transition-colors relative group'>
-              Contest
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r  from-white to-gray-200 group-hover:w-full transition-all duration-300"></span>
-            </li>
-            <li className='hover:text-white font-semibold transition-colors relative group'>
-              Registered
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r  from-white to-gray-200 group-hover:w-full transition-all duration-300"></span>
-            </li>
+            </Link>
+          ))  }
           </ul>
         </div>
         )}
@@ -46,7 +62,7 @@ export default function Header() {
           <nav className="hidden md:block">
             <ul className="flex justify-center items-center gap-2 font-semibold cursor-pointer">
               <li className=''>
-                <Link href="/login" className="text-gray-300 hover:text-purple-400 gap-2  transition-colors relative group">
+                <Link href="/login"  className="text-gray-300 hover:text-purple-400 gap-2  transition-colors relative group">
                   Login
                   <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r  from-purple-400 to-pink-500 group-hover:w-full transition-all duration-300"></span>
                 </Link>
