@@ -28,9 +28,6 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <div className="bg-black mt-12 px-4 w-full  text-gray-300">
-  
-      </div>
     </div>
   );
 }

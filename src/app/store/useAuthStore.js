@@ -17,7 +17,7 @@ export const useAuthStore = create((set) => ({
       const res = await axiosInstanceAuthService.get("/auth/check-Auth");
       console.log("checkauth response", res.data);
 
-      set({ authUser: res.data.user });
+      set({ authUser: res?.data?.user });
     } catch (error) {
       console.log("❌ Error checking auth:", error);
       set({ authUser: null });
@@ -30,8 +30,8 @@ export const useAuthStore = create((set) => ({
         set({isSigninUp:true});
         try {
             const res = await axiosInstanceAuthService.post("/auth/register" , data);
-            set({authUser:res.data.user});
-            toast.success(res.data.message)
+            set({authUser:res?.data?.user});
+            toast.success(res?.data?.message || "signup successful")
 
         } catch (error) {
             console.log("error signing up" , error);
@@ -48,8 +48,8 @@ export const useAuthStore = create((set) => ({
         set({isLoggingIn:true});
         try {
             const res = await axiosInstanceAuthService.post("/auth/login" , data);
-            set({authUser:res.data.data});
-            toast.success(res.data.message)
+            set({authUser:res?.data?.data});
+            toast.success(res?.data?.message || "login successful")
         } catch (error) {
             console.log("error loging In");
             toast.error("error loging In")
