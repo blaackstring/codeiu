@@ -2,12 +2,13 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation';
-import { useState } from 'react'
+import { useAuthStore } from '../store/useAuthStore';
 
 
 export default function Header() {
 
-  const [isLoggedIn , setisLoggedIn] = useState(true); 
+ const { isLoggingIn}=useAuthStore()
+ 
 
   const pages= [
     {
@@ -43,10 +44,10 @@ export default function Header() {
           </Link>
         </div>
         
-        {isLoggedIn && (
+        {isLoggingIn && (
           <div>
           <ul className="flex justify-center items-center gap-6 font-semibold cursor-pointer">
-          {pages.map((page,i)=>(
+          {isLoggingIn&&pages.map((page,i)=>(
             <Link href={page.link} key={i} className={`${pathname==page.link?'text-purple-500':"text-gray-300"
             } font-semibold transition-colors relative group`}>
               {page.name}

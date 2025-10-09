@@ -3,16 +3,17 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useAuthStore } from "@/app/store/useAuthStore";
 
 export default function Signup() {
   const [formData, setFormData] = useState({
-    firstName: "",
+    username: "",
     email: "",
     password: "",
     confirmPassword: "",
   });
   const [errors, setErrors] = useState({});
-
+const {signup}=useAuthStore()
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -30,13 +31,11 @@ export default function Signup() {
   const validateForm = () => {
     const newErrors = {};
 
-    if (!formData.firstName.trim()) {
-      newErrors.firstName = "First name is required";
+    if (!formData.username.trim()) {
+      newErrors.username = "user name is required";
     }
 
-    if (!formData.lastName.trim()) {
-      newErrors.lastName = "Last name is required";
-    }
+   
 
     if (!formData.email) {
       newErrors.email = "Email is required";
@@ -60,11 +59,11 @@ export default function Signup() {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
     if (validateForm()) {
       console.log("Signup data:", formData);
-      alert("Account created successfully! (This is just a demo)");
+     await signup(formData);
     }
   };
 
@@ -90,13 +89,13 @@ export default function Signup() {
               htmlFor="firstName"
               className="block mb-2 text-cyan-400 font-medium"
             >
-              First Name
+              UserName
             </label>
             <input
               type="text"
-              id="firstName"
-              name="firstName"
-              value={formData.firstName}
+              id="username"
+              name="username"
+              value={formData.username}
               onChange={handleChange}
               placeholder="Enter your first name"
               className="w-full px-4 py-3 bg-gray-800/50 border border-purple-500/30 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-transparent transition-all"
@@ -108,26 +107,6 @@ export default function Signup() {
             )}
           </div>
 
-          <div className="mb-6">
-            <label
-              htmlFor="lastName"
-              className="block mb-2 text-purple-400 font-medium"
-            >
-              Last Name
-            </label>
-            <input
-              type="text"
-              id="lastName"
-              name="lastName"
-              value={formData.lastName}
-              onChange={handleChange}
-              placeholder="Enter your last name"
-              className="w-full px-4 py-3 bg-gray-800/50 border border-purple-500/30 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent transition-all"
-            />
-            {errors.lastName && (
-              <div className="text-red-500 text-sm mt-2">{errors.lastName}</div>
-            )}
-          </div>
 
           <div className="mb-6">
             <label

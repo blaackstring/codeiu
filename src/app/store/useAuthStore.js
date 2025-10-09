@@ -2,6 +2,7 @@
 
 import {create} from 'zustand';
 import { axiosInstanceAuthService } from '../lib/axios';
+import {toast} from 'react-toastify';
 
 
 //variable and methods which we will use globally 
@@ -30,8 +31,16 @@ export const useAuthStore = create((set) => ({
         set({isSigninUp:true});
         try {
             const res = await axiosInstanceAuthService.post("/auth/register" , data);
-            set({authUser:res?.data?.user});
-            toast.success(res?.data?.message || "signup successful")
+            const data= await res.json()
+             console.log(data);
+            
+         if(res.status===200)
+          {
+            set({authUser:res?.data?.data});
+           
+          toast.success(res?.data?.message || "signup successful")
+          return true
+          }
 
         } catch (error) {
             console.log("error signing up" , error);
@@ -44,14 +53,24 @@ export const useAuthStore = create((set) => ({
     },
 
     login: async (data) => {
-
+       console.log(data)
         set({isLoggingIn:true});
         try {
             const res = await axiosInstanceAuthService.post("/auth/login" , data);
+            console.log(res);
+            
+         if(res.status===200)
+         {
             set({authUser:res?.data?.data});
+            console.log(res);
             toast.success(res?.data?.message || "login successful")
+             return true
+         }
+        
+
+
         } catch (error) {
-            console.log("error loging In");
+            console.log("error loging In",error.message);
             toast.error("error loging In")
         }
 

@@ -1,8 +1,10 @@
-'use client'
+"use client"
 
 import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
+import { useAuthStore } from '@/app/store/useAuthStore.js'
+import { useRouter } from 'next/navigation'
 
 const GOOGLE_CLIENT_ID = "YOUR_GOOGLE_CLIENT_ID"
 const REDIRECT_URI = typeof window !== "undefined" ? window.location.origin + "/login" : ""
@@ -23,6 +25,8 @@ export default function Login() {
     password: ''
   })
   const [errors, setErrors] = useState({})
+  const navigate=useRouter();
+  const {login}=useAuthStore()
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -57,16 +61,21 @@ export default function Login() {
     return Object.keys(newErrors).length === 0
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault()
     if (validateForm()) {
-      console.log('Login data:', formData)
-      alert('Login successful! (This is just a demo)')
+   const res=  await login(formData);
+console.log(res);
+
+   if(res){
+   navigate.push('/')
+   }
+
     }
   }
 
   return (
-    <div className="min-h-screen bg-black relative overflow-hidden py-12">
+    <div className="min-h-screen bg-black sm:p-2 lg:p-0 p-2 relative overflow-hidden py-12">
       {/* Animated Background */}
       <div className="absolute inset-0">
         <div className="absolute top-20 left-10 w-3 h-3 bg-purple-500 rounded-full opacity-60 animate-pulse"></div>
