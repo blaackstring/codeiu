@@ -1,56 +1,56 @@
-'use client'
+"use client";
 
-import React from 'react';
-import { Search, ArrowUpDown, Filter, Shuffle, Moon } from 'lucide-react';
+import React from "react";
+import { Search, ArrowUpDown, Filter, Shuffle, Moon } from "lucide-react";
 
 const problemSets = [
   {
-    title: 'Master Interview',
-    progress: '0/25',
-    author: 'By CodeIU',
+    title: "Master Interview",
+    progress: "0/25",
+    author: "By CodeIU",
   },
   {
-    title: 'Array Mastery',
-    progress: '0/15',
-    author: 'By CodeIU',
+    title: "Array Mastery",
+    progress: "0/15",
+    author: "By CodeIU",
   },
   {
-    title: 'Master Google Prep',
-    progress: '0/15',
-    author: 'By CodeIU',
+    title: "Master Google Prep",
+    progress: "0/15",
+    author: "By CodeIU",
   },
 ];
 
 const problems = [
   {
-    title: 'Two Sum',
-    difficulty: 'Easy',
-    acceptance: '33.3%',
+    title: "Two Sum",
+    difficulty: "Easy",
+    acceptance: "33.3%",
   },
   {
-    title: 'Checking for Palindrome Numbers',
-    difficulty: 'Easy',
-    acceptance: '20.9%',
+    title: "Checking for Palindrome Numbers",
+    difficulty: "Easy",
+    acceptance: "20.9%",
   },
   {
-    title: 'Sqrt(x)',
-    difficulty: 'Med.',
-    acceptance: '35.3%',
+    title: "Sqrt(x)",
+    difficulty: "Med.",
+    acceptance: "35.3%",
   },
   {
-    title: 'Add Two Large Numbers as Strings',
-    difficulty: 'Easy',
-    acceptance: '25%',
+    title: "Add Two Large Numbers as Strings",
+    difficulty: "Easy",
+    acceptance: "25%",
   },
 ];
 
 const DifficultyChip = ({ difficulty }) => {
   const color =
-    difficulty === 'Easy'
-      ? 'text-green-400'
-      : difficulty === 'Med.'
-      ? 'text-yellow-400'
-      : 'text-red-400';
+    difficulty === "Easy"
+      ? "text-green-400"
+      : difficulty === "Med."
+      ? "text-yellow-400"
+      : "text-red-400";
   return <span className={`font-medium ${color}`}>{difficulty}</span>;
 };
 
@@ -62,14 +62,19 @@ const ProblemsPage = () => {
         <header className="flex justify-between items-center mb-8">
           <div>
             <h1 className="text-3xl font-bold text-white">Problems</h1>
-            <p className="text-gray-400 mt-2">Boost your coding skills with our curated problems.</p>
+            <p className="text-gray-400 mt-2">
+              Boost your coding skills with our curated problems.
+            </p>
           </div>
         </header>
 
-       {/* Problem Sets */}
+        {/* Problem Sets */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
           {problemSets.map((set, index) => (
-            <div key={index} className="relative overflow-hidden bg-black border border-gray-700/50 rounded-xl p-6 flex flex-col justify-between hover:border-gray-600 hover:-translate-y-1 transition-all cursor-pointer">
+            <div
+              key={index}
+              className="relative overflow-hidden bg-black border border-gray-700/50 rounded-xl p-6 flex flex-col justify-between hover:border-gray-600 hover:-translate-y-1 transition-all cursor-pointer"
+            >
               {/* Background Effects */}
               <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.04)_2px,transparent_2px),linear-gradient(to_bottom,rgba(255,255,255,0.04)_2px,transparent_4px)] bg-[size:1.5rem_1.5rem] opacity-50"></div>
               <div className="absolute -bottom-20 -right-15 w-60 h-60 bg-[radial-gradient(circle,rgba(96,165,250,0.15)_0%,transparent_60%)]"></div>
@@ -78,13 +83,23 @@ const ProblemsPage = () => {
               <div className="relative z-10 flex flex-col justify-between h-full">
                 <div>
                   <div className="flex justify-between items-start mb-4">
-                    <h2 className="text-xl font-bold text-white">{set.title}</h2>
-                    <span className="text-gray-300 font-semibold bg-gray-800 px-3 py-1 rounded-full text-xs">{set.progress}</span>
+                    <h2 className="text-xl font-bold text-white">
+                      {set.title}
+                    </h2>
+                    <span className="text-gray-300 font-semibold bg-gray-800 px-3 py-1 rounded-full text-xs">
+                      {set.progress}
+                    </span>
                   </div>
-                  <p className="text-gray-400 text-sm">{set.author}</p>
                 </div>
-                <div className="text-right mt-6">
-                   <span className="text-2xl filter  opacity-60">🌊</span>
+                <div className="flex justify-between items-end mt-15">
+                  {/* This item will be pushed to the left */}
+                  <span>
+                    {/* YOUR CODE/CONTENT GOES HERE */}
+                    {set.author}
+                  </span>
+
+                  {/* This item will be pushed to the right */}
+                  <span className="text-2xl filter opacity-60">🌊</span>
                 </div>
               </div>
             </div>
@@ -113,31 +128,33 @@ const ProblemsPage = () => {
             </button>
           </div>
         </div>
-        
+
         {/* Problems List */}
         <div className="bg-gray-900 border border-gray-700/50 rounded-xl">
-            <div className="grid grid-cols-12 px-6 py-4 border-b border-gray-700/50 text-xs font-semibold text-gray-500 uppercase tracking-wider">
-                <div className="col-span-6">Title</div>
-                <div className="col-span-3 text-center">Difficulty</div>
-                <div className="col-span-3 text-right">Acceptance</div>
-            </div>
-            <div>
-                {problems.map((problem, index) => (
-                    <div key={index} className="grid grid-cols-12 items-center px-6 py-5 bg-black border-b border-white/10 last:border-b-0 hover:bg-gray-800/50 transition-colors cursor-pointer">
-                        <div className="col-span-6">
-                            <p className="text-white font-medium">{problem.title}</p>
-                        </div>
-                        <div className="col-span-3 text-center">
-                            <DifficultyChip difficulty={problem.difficulty} />
-                        </div>
-                        <div className="col-span-3 text-right">
-                            <p className="text-gray-400">{problem.acceptance}</p>
-                        </div>
-                    </div>
-                ))}
-            </div>
+          <div className="grid grid-cols-12 px-6 py-4 border-b border-gray-700/50 text-xs font-semibold text-gray-500 uppercase tracking-wider">
+            <div className="col-span-6">Title</div>
+            <div className="col-span-3 text-center">Difficulty</div>
+            <div className="col-span-3 text-right">Acceptance</div>
+          </div>
+          <div>
+            {problems.map((problem, index) => (
+              <div
+                key={index}
+                className="grid grid-cols-12 items-center px-6 py-5 bg-black border-b border-white/10 last:border-b-0 hover:bg-gray-800/50 transition-colors cursor-pointer"
+              >
+                <div className="col-span-6">
+                  <p className="text-white font-medium">{problem.title}</p>
+                </div>
+                <div className="col-span-3 text-center">
+                  <DifficultyChip difficulty={problem.difficulty} />
+                </div>
+                <div className="col-span-3 text-right">
+                  <p className="text-gray-400">{problem.acceptance}</p>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
-
       </div>
     </div>
   );
