@@ -174,7 +174,7 @@ export default function Signup() {
           </form>
           
           <div className="text-center my-4 text-sm text-gray-600">
-            Already have an Account? <a href="#" className="font-semibold text-black hover:underline">Sign in</a>
+            Already have an Account? <a href="/login" className="font-semibold text-black hover:underline">Sign in</a>
           </div>
 
           <div className="mt-6">
