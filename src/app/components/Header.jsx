@@ -71,7 +71,7 @@ export default function Header() {
                 </Link>
               </li>
                <li className=''>
-                <Link href="/login"  className="text-white hover:text-gray-300 gap-2  transition-colors relative group">
+                <Link href="/contest"  className="text-white hover:text-gray-300 gap-2  transition-colors relative group">
                   Contest
                 </Link>
               </li>

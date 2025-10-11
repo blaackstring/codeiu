@@ -92,13 +92,9 @@ const ProblemsPage = () => {
                   </div>
                 </div>
                 <div className="flex justify-between items-end mt-15">
-                  {/* This item will be pushed to the left */}
                   <span>
-                    {/* YOUR CODE/CONTENT GOES HERE */}
                     {set.author}
                   </span>
-
-                  {/* This item will be pushed to the right */}
                   <span className="text-2xl filter opacity-60">🌊</span>
                 </div>
               </div>
