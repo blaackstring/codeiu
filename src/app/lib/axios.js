@@ -1,9 +1,9 @@
 import axios from 'axios';
-console.log(process.env.NEXT_PUBLIC_MODE);
 
+console.log("env:",process.env.NEXT_PUBLIC_MODE);
 export const axiosInstanceAuthService = axios.create({
-    baseURL: process.env.NEXT_PUBLIC_MODE == "development" ? "http://localhost:8020/api/v1" : "/api/v1",
-    withCredentials: true,
+    baseURL: process.env.NEXT_PUBLIC_MODE == "development" ? "http://localhost:8020/api/v1",
+    withCredentials:true,
 })
 
 export const axiosInstanceProblemService = axios.create({
@@ -11,7 +11,7 @@ export const axiosInstanceProblemService = axios.create({
     withCredentials: true,
 })
 
-export const axiosInstanceSubbmissionService = axios.create({
+export const axiosInstanceSubmissionService = axios.create({
     baseURL: process.env.NEXT_PUBLIC_MODE === "development" ? "http://localhost:8080/api/v1" : "/api/v1",
     withCredentials:true,
 })

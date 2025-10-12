@@ -47,7 +47,7 @@ export default function Signup() {
   const validateForm = () => {
     const newErrors = {};
     if (!formData.email) {
-      newErrors.email = "Email is required";
+      newErrors.email   = "Email is required";
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
       newErrors.email = "A valid email is required";
     }
