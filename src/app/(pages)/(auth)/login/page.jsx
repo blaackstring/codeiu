@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Eye, EyeOff, Github, Apple } from 'lucide-react';
+import { Eye, EyeOff, Github, Apple , Loader2} from 'lucide-react';
 import { useAuthStore } from "@/app/store/useAuthStore";
 
 // Custom Google Icon SVG Component
@@ -38,7 +38,7 @@ export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const [errors, setErrors] = useState({});
   const router = useRouter();
-  const { login } = useAuthStore();
+  const { login , isLoggingIn } = useAuthStore();
 
 
 
@@ -55,6 +55,9 @@ export default function Login() {
       }));
     }
   };
+
+  
+
 
   const validateForm = () => {
     const newErrors = {};
@@ -78,6 +81,12 @@ export default function Login() {
     e.preventDefault();
     if (validateForm()) {
       const res = await login(formData);
+      console.log("form data............................");
+      console.log(formData);
+
+      console.log("responce............................");
+      console.log(res);
+
       if (res) {
         
         router.push("/");
@@ -110,7 +119,7 @@ export default function Login() {
           <form onSubmit={handleSubmit} noValidate>
             <div className="mb-5">
               <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-700">
-                User name
+                Email
               </label>
               <input
                 type="email"
@@ -118,7 +127,7 @@ export default function Login() {
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
-                placeholder="Enter your user name"
+                placeholder="Enter your email"
                 className={`w-full px-4 py-3 border ${errors.email ? 'border-red-500' : 'border-gray-300'} rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-black`}
               />
               {errors.email && (
@@ -171,9 +180,14 @@ export default function Login() {
 
             <button
               type="submit"
-              className="w-full bg-black text-white py-3 rounded-lg font-semibold hover:bg-gray-800 transition-colors duration-300"
+              className="w-full  flex items-center justify-center bg-black text-white py-3 rounded-lg font-semibold hover:bg-gray-800 transition-colors duration-300"
             >
-              Login
+              {
+                isLoggingIn ? (
+                  <> <Loader2 className="h-5 w-5 animate-spin" /></>
+                ) : ( "Sign In") 
+
+              }
             </button>
           </form>
           

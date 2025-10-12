@@ -1,7 +1,7 @@
 // zustand is used for global state manegment =>means can access variable or props from any where in the project
 
 import {create} from 'zustand';
-import { axiosInstanceAuthService } from '../lib/axios';
+import { axiosInstanceAuthService } from '../lib/axios.js';
 import {toast} from 'react-toastify';
 
 
@@ -53,24 +53,26 @@ export const useAuthStore = create((set) => ({
     },
 
     login: async (data) => {
+
+      console.log("data from login function ..............................");
+      console.log(data);
       
         set({isLoggingIn:true});
         try {
             const res = await axiosInstanceAuthService.post("/auth/login" , data);
-             console.log(res);
+            console.log("responce from login function ..............................");
+            console.log(res.data);
             
             
-         if(res.status===200)
-         {
-            set({authUser:res?.data?.data});
+          if(res.success===true)
+          {
+              set({authUser:res?.data?.user});
+          
+              console.log(res);
+              toast.success(res?.data?.message || "login successful")
+              return true
+          }
         
-            console.log(res);
-            toast.success(res?.data?.message || "login successful")
-             return true
-         }
-        
-
-
         } catch (error) {
             console.log("error loging In",error.message);
             toast.error("error loging In")

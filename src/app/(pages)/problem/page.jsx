@@ -1,7 +1,9 @@
 "use client";
 
-import React from "react";
-import { Search, ArrowUpDown, Filter, Shuffle, Moon } from "lucide-react";
+import { useState , useEffect } from "react";
+import { Search, ArrowUpDown, Filter, Shuffle, Moon, Loader2, Loader , Ellipsis} from "lucide-react";
+import { useProblemStore } from "@/app/store/useProblemStore";
+import { useAuthStore } from "@/app/store/useAuthStore";
 
 const problemSets = [
   {
@@ -21,40 +23,33 @@ const problemSets = [
   },
 ];
 
-const problems = [
-  {
-    title: "Two Sum",
-    difficulty: "Easy",
-    acceptance: "33.3%",
-  },
-  {
-    title: "Checking for Palindrome Numbers",
-    difficulty: "Easy",
-    acceptance: "20.9%",
-  },
-  {
-    title: "Sqrt(x)",
-    difficulty: "Med.",
-    acceptance: "35.3%",
-  },
-  {
-    title: "Add Two Large Numbers as Strings",
-    difficulty: "Easy",
-    acceptance: "25%",
-  },
-];
 
 const DifficultyChip = ({ difficulty }) => {
   const color =
-    difficulty === "Easy"
+    difficulty === "EASY"
       ? "text-green-400"
-      : difficulty === "Med."
+      : difficulty === "MEDIUM"
       ? "text-yellow-400"
       : "text-red-400";
   return <span className={`font-medium ${color}`}>{difficulty}</span>;
 };
 
 const ProblemsPage = () => {
+
+  const {authUser} = useAuthStore();
+
+  console.log("authuser..........................");
+  console.log(authUser);
+
+  const { isProblemsLoading , problems , getAllProblems} = useProblemStore();
+
+  useEffect(() => {
+    getAllProblems();
+  }, []);
+
+  console.log("....................PROBLEMS...........................");
+  console.log(problems);
+
   return (
     <div className="bg-black text-gray-300 min-h-screen font-sans p-4 sm:p-6 lg:p-8">
       <div className="max-w-7xl mx-auto">
@@ -132,7 +127,12 @@ const ProblemsPage = () => {
             <div className="col-span-3 text-center">Difficulty</div>
             <div className="col-span-3 text-right">Acceptance</div>
           </div>
-          <div>
+          {isProblemsLoading ? (
+            <div className="flex items-center justify-center mt-4 mb-4">
+              <Loader className="h-10 w-10 animate-spin " />
+            </div>
+          ) : (
+            <div>
             {problems.map((problem, index) => (
               <div
                 key={index}
@@ -150,6 +150,8 @@ const ProblemsPage = () => {
               </div>
             ))}
           </div>
+          )}
+          
         </div>
       </div>
     </div>
