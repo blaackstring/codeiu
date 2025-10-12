@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Eye, EyeOff, Github, Apple } from 'lucide-react';
+import { useAuthStore } from "@/app/store/useAuthStore";
 
 // Custom Google Icon SVG Component
 const GoogleIcon = () => (
@@ -28,23 +29,6 @@ const EyeIcon = ({ toggleVisibility, isVisible }) => (
 );
 
 // Mock implementation for the auth store for demonstration purposes
-const useAuthStore = () => ({
-  login: async (formData) => {
-    console.log("Attempting to log in with:", formData);
-    // Simulate API call
-    return new Promise(resolve => {
-      setTimeout(() => {
-        if (formData.email && formData.password) {
-          console.log("Login successful");
-          resolve({ success: true });
-        } else {
-          console.log("Login failed");
-          resolve(null);
-        }
-      }, 1000);
-    });
-  },
-});
 
 export default function Login() {
   const [formData, setFormData] = useState({
@@ -55,6 +39,8 @@ export default function Login() {
   const [errors, setErrors] = useState({});
   const router = useRouter();
   const { login } = useAuthStore();
+
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -93,7 +79,7 @@ export default function Login() {
     if (validateForm()) {
       const res = await login(formData);
       if (res) {
-        // In a real app, you might navigate to a dashboard
+        
         router.push("/");
       }
     }
@@ -209,20 +195,7 @@ export default function Login() {
                 >
                     <GoogleIcon />
                 </button>
-                <button
-                    type="button"
-                    className="p-3 border border-gray-300 rounded-full text-gray-700 hover:bg-gray-50 flex items-center justify-center"
-                    aria-label="Sign in with GitHub"
-                >
-                    <Github className="w-5 h-5" />
-                </button>
-                <button
-                    type="button"
-                    className="p-3 border border-gray-300 rounded-full text-gray-700 hover:bg-gray-50 flex items-center justify-center"
-                    aria-label="Sign in with Apple"
-                >
-                    <Apple className="w-5 h-5" />
-                </button>
+            
             </div>
           </div>
         </div>

@@ -2,25 +2,10 @@
 
 import { useState } from "react";
 import { Eye, EyeOff, Github , Linkedin } from 'lucide-react';
+import { useAuthStore } from "@/app/store/useAuthStore";
 
 // Mock implementation for the auth store for demonstration purposes
-const useAuthStore = () => ({
-  signup: async (formData) => {
-    console.log("Attempting to sign up with:", formData);
-    // Simulate API call
-    return new Promise(resolve => {
-      setTimeout(() => {
-        if (formData.email && formData.username && formData.password) {
-          console.log("Signup successful");
-          resolve({ success: true });
-        } else {
-          console.log("Signup failed");
-          resolve(null);
-        }
-      }, 1000);
-    });
-  },
-});
+
 
 // --- SVG Icons ---
 const GoogleIcon = () => (

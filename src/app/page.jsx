@@ -1,8 +1,17 @@
 "use client";
 
+import { useEffect, useState } from "react";
+import { useAuthStore } from "./store/useAuthStore";
+
 
 
 export default function Home() {
+ const {checkAuth}= useAuthStore();
+ const [loading, setLoading] = useState(true);
+
+ useEffect(()=>{
+  checkAuth();
+ },[])
   return (
     <div className="min-h-screen flex flex-col justify-center items-center bg-black text-white font-sans p-4">
       <div className="text-center">

@@ -7,8 +7,9 @@ import { useAuthStore } from '../store/useAuthStore';
 
 export default function Header() {
 
- const { isLoggingIn}=useAuthStore()
+ const { isLoggingIn,authUser}=useAuthStore()
  
+console.log(authUser);
 
   const pages= [
     {
@@ -86,13 +87,21 @@ export default function Header() {
         <div className=" flex  px-4 py-2 rounded-full">
        
           <nav className="hidden md:block">
-            <ul className="flex justify-center items-center gap-2 text-md font-mono cursor-pointer">
+          { !authUser?.username? <ul className="flex justify-center items-center gap-2 text-md font-mono cursor-pointer">
               <li className=''>
                 <Link href="/login"  className="text-white hover:text-blue-400 gap-2  transition-colors relative group">
                   Sign in
                 </Link>
               </li>
+            </ul>:
+            <ul className="flex justify-center items-center gap-2 text-md font-mono cursor-pointer">
+              <li className=''>
+                <button className="p-1 hover:text-blue-400 gap-2 rounded bg-white/80 text-black transition-colors relative group">
+               User:  {authUser?.username}
+                </button>
+              </li>
             </ul>
+            }
           </nav>
         </div>  
           {/* Mobile menu button */}

@@ -31,8 +31,8 @@ export const useAuthStore = create((set) => ({
         set({isSigninUp:true});
         try {
             const res = await axiosInstanceAuthService.post("/auth/register" , data);
-            const data= await res.json()
-             console.log(data);
+            
+             console.log(res);
             
          if(res.status===200)
           {
@@ -53,15 +53,17 @@ export const useAuthStore = create((set) => ({
     },
 
     login: async (data) => {
-       console.log(data)
+      
         set({isLoggingIn:true});
         try {
             const res = await axiosInstanceAuthService.post("/auth/login" , data);
-            console.log(res);
+             console.log(res);
+            
             
          if(res.status===200)
          {
             set({authUser:res?.data?.data});
+        
             console.log(res);
             toast.success(res?.data?.message || "login successful")
              return true
