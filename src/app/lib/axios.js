@@ -7,11 +7,19 @@ export const axiosInstanceAuthService = axios.create({
 })
 
 export const axiosInstanceProblemService = axios.create({
-    baseURL: process.env.NEXT_PUBLIC_MODE === "development" ? "http://localhost:8000/api/v1" : "/api/v1",
+    baseURL: process.env.NEXT_PUBLIC_MODE === "development" ? "http://localhost:4010/api/v1" : "/api/v1",
     withCredentials: true,
 })
 
 export const axiosInstanceSubbmissionService = axios.create({
-    baseURL: process.env.NEXT_PUBLIC_MODE === "development" ? "http://localhost:8080/api/v1" : "/api/v1",
+    baseURL: process.env.NEXT_PUBLIC_MODE === "development" ? "http://localhost:4030/api/v1" : "/api/v1",
+    withCredentials:true,
+})  
+export const axiosInstanceContestService = axios.create({
+    baseURL: process.env.NEXT_PUBLIC_MODE === "development" ? "http://localhost:400/api/v1" : "/api/v1",
+    withCredentials:true,
+}) 
+export const axiosInstanceNotificationService = axios.create({
+    baseURL: process.env.NEXT_PUBLIC_MODE === "development" ? "http://localhost:4040/api/v1" : "/api/v1",
     withCredentials:true,
 })
