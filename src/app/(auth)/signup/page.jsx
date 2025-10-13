@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { Eye, EyeOff, Github , Linkedin } from 'lucide-react';
 import { useAuthStore } from "@/app/store/useAuthStore";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 // Mock implementation for the auth store for demonstration purposes
 
@@ -35,7 +37,7 @@ export default function Signup() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const { signup } = useAuthStore();
-
+  const router= useRouter()
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -71,7 +73,10 @@ export default function Signup() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (validateForm()) {
-      await signup(formData);
+      const success = await signup(formData); // ✅ assume signup returns true/false
+      if (success) {
+        router.push("/login"); // ✅ redirect on success
+      }
     }
   };
 
