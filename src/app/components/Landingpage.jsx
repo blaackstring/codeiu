@@ -4,7 +4,7 @@ const Landingpage = () => {
   return (
      <div className="flex flex-col justify-center items-center absolute h-[112vh] bg-black/10 w-[100vw] h-min-screen text-white font-sans p-4">
       <div className="text-center">
-        <h1 className="text-4xl md:text-7xl font-bold tracking-wide uppercase px-10 bg-white/15 text-white rounded mb-6">
+        <h1 className="text-4xl md:text-6xl font-bold tracking-wide uppercase px-10 bg-white/15 text-white rounded mb-6">
           {"Fueling the Future of 🌊odeing."}   <span>
          
           </span>
