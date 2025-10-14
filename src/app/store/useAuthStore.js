@@ -28,7 +28,65 @@ export const useAuthStore = create((set) => ({
     }
   },
 
-  checkAuth: async () => {
+    signup:async (data) =>{
+        set({isSigninUp:true});
+        try {
+            const res = await axiosInstanceAuthService.post("/auth/register" , data);
+            
+             console.log(res);
+            
+         if(res.status===200)
+          {
+            set({authUser:res?.data?.data});
+           
+          toast.success(res?.data?.message || "signup successful")
+          return true
+          }
+
+        } catch (error) {
+            console.log("error signing up" , error);
+            toast.error("error signign up");
+        }
+
+        finally{
+            set({isSigninUp:false})
+        }
+    },
+
+    login: async (data) => {
+
+      console.log("data from login function ..............................");
+      console.log(data);
+      
+        set({isLoggingIn:true});
+        try {
+            const res = await axiosInstanceAuthService.post("/auth/login" , data);
+            console.log("responce from login function ..............................");
+            console.log(res.data);
+            
+            
+          if(res.success===true)
+          {
+              set({authUser:res?.data?.user});
+          
+              console.log(res);
+              toast.success(res?.data?.message || "login successful")
+              return true
+          }
+        
+        } catch (error) {
+            console.log("error loging In",error.message,error.response.data);
+            toast.error("error loging In")
+        }
+
+        finally{
+             set({isLoggingIn:false})
+        }
+
+    }, 
+
+ 
+  logout: async (data) => {
     try {
       const res = await axiosInstanceAuthService.get(`/auth/check-Auth?t=${Date.now()}`, {
         withCredentials: true,
